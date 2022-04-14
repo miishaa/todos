@@ -2,6 +2,7 @@
 
 *{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,10 +13,6 @@ body {
   margin-right: auto;
   background: linear-gradient(#e66465, #9198e5);
   background-repeat: no-repeat;
-
-  @media (max-width < 900px) {
-    
-  }
 }
 
 h1 {
@@ -97,6 +94,24 @@ li {
 fieldset {
   display: flex;
   margin-bottom: 3rem;
+
+  label {
+    margin-right: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+
+    label {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 1rem;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
 }
 
 #add_task, 
@@ -108,7 +123,7 @@ fieldset {
 }
 
 #add_task {
-  margin-left: .5em;
+  //codes
 }
 
 #delete_tasks{

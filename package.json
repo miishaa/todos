@@ -1,7 +1,7 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "My First todo app =)",
   "scripts": {
     "sass-watch": "sass --watch  sass/style.scss style.css --style=expanded --embed-source-map",
     "sass-build": "sass sass/style.scss style.css --style=compressed --no-source-map",
