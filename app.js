@@ -4,6 +4,12 @@ const deleteAll = document.getElementById('delete_tasks');
 const list = document.getElementById('list');
 const doneList = document.getElementById('done_list');
 const form = document.querySelector('form');
+const dialog = document.querySelector('dialog');
+const closeDialogBtn = document.querySelector('.js-close-dialog');
+
+closeDialogBtn.addEventListener('click', () => {
+  dialog.close()
+})
 
 const renderTask = (todo, id) => {
 
@@ -14,15 +20,36 @@ const renderTask = (todo, id) => {
     <label>${todo.taskName}
       <input type="checkbox" ${todo.status ? 'checked' : ''}>
     </label>
-    <button class="js-delete" id="${id}">&#10060;</button>
+    <button class="js-delete" id="${id}"><span>❌</span></button>
   </li>
 `)}
+
+const checkEmpty = (place) => {
+  if (!place.childElementCount) {
+    place.classList.add('empty')
+  } else {
+    place.classList.remove('empty')
+  }
+}
+
+const checkAllEmpty = () => {
+  let main = document.querySelector('main');
+  if(!list.childElementCount && !doneList.childElementCount) {
+    main.classList.add('empty')
+  } else {
+    main.classList.remove('empty')
+  }
+}
 
 const watchDeleteSingleTaskBtn = () =>{
   document.querySelectorAll('.js-delete').forEach(el => {
     el.addEventListener('click', (e) => {
       e.target.closest('li').remove()
       delete localStorage[e.target.id]
+
+      checkEmpty(list);
+      checkEmpty(doneList);
+      checkAllEmpty()
     })
   })
 }
@@ -33,15 +60,11 @@ const deleteAllTasksBtn = () => {
     localStorage.clear();
     list.innerHTML = '';
     doneList.innerHTML = '';
-  })
-}
 
-const checkEmpty = (place) => {
-  if (!place.childElementCount) {
-    place.classList.add('empty')
-  } else {
-    place.classList.remove('empty')
-  }
+    checkEmpty(list);
+    checkEmpty(doneList);
+    checkAllEmpty()
+  })
 }
 
 const watchStatus = () => {
@@ -66,7 +89,7 @@ const watchStatus = () => {
 
       checkEmpty(list);
       checkEmpty(doneList);
-
+      checkAllEmpty()
     })
   })
 }
@@ -91,7 +114,10 @@ sortedArray.sort().forEach(task => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (taskInput.value.length === 0) return;
+  if (taskInput.value.length === 0) {
+    dialog.showModal()
+    return
+  };
 
   let currentIndex = +localStorage.getItem('taskIndex');
   localStorage.setItem( currentIndex, 
@@ -105,10 +131,15 @@ form.addEventListener('submit', (e) => {
   renderTask(JSON.parse(localStorage.getItem(currentIndex)), currentIndex)
 
   taskInput.value = '';
+
   watchDeleteSingleTaskBtn();
   watchStatus();
+  checkEmpty(list);
+  checkEmpty(doneList);
+  checkAllEmpty()
 })
 
 deleteAllTasksBtn();
 watchDeleteSingleTaskBtn();
 watchStatus();
+checkAllEmpty()

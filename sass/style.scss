@@ -1,12 +1,12 @@
 @use 'normilize';
 
-*{
+*, *::before, *::after{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   box-sizing: border-box;
 }
 
 body {
-  width: min(calc(100% - 40px), 1400px);
+  width: min(calc(100% - 30px), 1400px);
   color: white;
   min-height: 100vh;
   margin-left: auto;
@@ -39,7 +39,7 @@ li {
 
   label{
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
     gap: 0.5rem;
@@ -47,13 +47,16 @@ li {
 
   input {
     order: -1;
+    flex-shrink: 0;
+    transform: translateY(8px);
   }
 
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(222, 222, 212, 0.456);
     aspect-ratio: 1;
-    border: 1px double rgba(255, 255, 255, 0.384);
-    border-radius: 50%;
     cursor: pointer;
 
     &:hover {
@@ -73,14 +76,17 @@ li {
     content: 'You have nothing to do \1F389';
   }
 
-  li:before {
-    font-weight: 900;
-    color: white;
-    counter-increment: undone;
-    content: counter(undone);
-    position: absolute;
-    left: -25px;
+  @media screen and (min-width: 769px) {
+    li:before {
+      font-weight: 900;
+      color: white;
+      counter-increment: undone;
+      content: counter(undone) '.' ;
+      position: absolute;
+      left: -25px;
+    }
   }
+
 }
 
 #done_list {
@@ -134,3 +140,41 @@ fieldset {
 
 
 
+@media (max-width: 768px) {
+  ul {
+    padding-inline-start: 0;
+  }
+}
+
+main.empty {
+  color: transparent;
+  position: relative;
+
+  &::after {
+    content: 'Add your first todos 😈';
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1.6;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+  }
+}
+
+
+dialog {
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  h3 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  button {
+    display: block;
+    text-align: center;
+    font-size: 3rem;
+    margin-inline: auto;
+  }
+}
