@@ -1,0 +1,17 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "sass-watch": "sass --watch  sass/style.scss style.css --style=expanded --embed-source-map",
+    "sass-build": "sass sass/style.scss style.css --style=compressed --no-source-map",
+    "prod-build": "npm i && npm run sass-build && npm install --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "normalize.css": "^8.0.1",
+    "sass": "^1.50.0"
+  }
+}

@@ -1,0 +1,121 @@
+@use 'normilize';
+
+*{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  width: min(calc(100% - 40px), 1400px);
+  color: white;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(#e66465, #9198e5);
+  background-repeat: no-repeat;
+
+  @media (max-width < 900px) {
+    
+  }
+}
+
+h1 {
+  padding-top: 1rem;
+  margin-top: 0;
+  font-size: 3rem;
+
+  code {
+    font-size: .3em;
+  }
+}
+
+li {
+  position: relative;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  &.done {
+    color: lightgreen;
+  }
+
+  label{
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    gap: 0.5rem;
+  }
+
+  input {
+    order: -1;
+  }
+
+  button {
+    background-color: rgba(222, 222, 212, 0.456);
+    aspect-ratio: 1;
+    border: 1px double rgba(255, 255, 255, 0.384);
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+}
+
+
+#list {
+  counter-reset: undone;
+
+  &:empty::after,
+  &.empty::after {
+    font-size: 1.5rem;
+    content: 'You have nothing to do \1F389';
+  }
+
+  li:before {
+    font-weight: 900;
+    color: white;
+    counter-increment: undone;
+    content: counter(undone);
+    position: absolute;
+    left: -25px;
+  }
+}
+
+#done_list {
+  &:empty::after,
+  &.empty::after {
+    font-size: 1.5rem;
+    content: 'No tasks done yet \1F622';
+  }
+}
+
+fieldset {
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+#add_task, 
+#delete_tasks,
+[type="text"] {
+  font-size: 1.2rem;
+  padding-block: .25em;
+  padding-inline: 1em;
+}
+
+#add_task {
+  margin-left: .5em;
+}
+
+#delete_tasks{
+  margin-left: auto;
+  background-color: rgb(255, 87, 58);
+  color: white;
+}
+
+
+

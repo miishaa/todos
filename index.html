@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO List</title>
+  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>todos <code>v1.0.0</code></h1>
+
+  <form>
+    <fieldset>
+      <legend>Add Task</legend>
+      <label>
+        <input type="text" id="new_task" placeholder="What do you need to do?">
+      </label>
+      <input type="submit" value="Add" id="add_task">
+      <button id="delete_tasks">Clear All</button>
+    </fieldset>
+  </form>
+
+  <h2>Undone</h2>
+  <ul id="list"></ul>
+
+  <h2>Done</h2>
+  <ul id="done_list"></ul>
+    
+</body>
+</html>
